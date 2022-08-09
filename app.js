@@ -18,6 +18,9 @@ app.use((req, res, next) => {
     );
     next();
   });
+app.get("/", (req,res) => {
+    res.send("Express API that saves links to a Notion database")
+})
 
 app.post('/add-url', async (req, res) => {
     const {link, tag} = req.body
