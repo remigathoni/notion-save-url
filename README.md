@@ -11,6 +11,13 @@ git clone https://github.com/gathoni-k/notion-save-url
 ```
 ## Use your own Notion Database
 Get [NOTION API key and database ID](https://developers.notion.com/docs/getting-started#getting-started) and add them to the .env file.
+```bash
+NOTION_KEY= your-notion-api-key
+NOTION_DATABASE_ID= your-notion-database-id
+```
+
+Then deploy your API. I used [Heroku](https://github.com/gathoni-k/notion-save-url).
+Remember to [add the .env variables to Heroku](https://devcenter.heroku.com/articles/config-vars) too.
 
 ## Use My Notion Database
 
