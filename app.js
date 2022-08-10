@@ -23,8 +23,9 @@ app.get("/", (req,res) => {
 })
 
 app.post('/add-url', async (req, res) => {
-    const {link, tag} = req.body
-    const response =  await addItem(link, tag)
+    const {title, link, tag} = req.body
+    const response =  await addItem(title, link, tag)
+    console.log({response})
     return res.json(
         {response}
     )

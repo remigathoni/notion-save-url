@@ -3,7 +3,7 @@ const { Client } = require("@notionhq/client")
 const notion = new Client({ auth: process.env.NOTION_KEY })
 const databaseId = process.env.NOTION_DATABASE_ID
 
-async function addItem(text, tag) {
+async function addItem(title, link, tag) {
   try {
     const response = await notion.pages.create({
       parent: { database_id: databaseId },
@@ -12,10 +12,14 @@ async function addItem(text, tag) {
           title:[
             {
               "text": {
-                "content": text
+                "content": title
               }
             }
           ]
+        },
+        Url: {
+          "type": "url",
+          "url": link
         },
         "Tags": {
             "multi_select": [
