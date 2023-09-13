@@ -1,38 +1,39 @@
-const { Client } = require("@notionhq/client")
+const { Client } = require("@notionhq/client");
 
-const notion = new Client({ auth: process.env.NOTION_KEY })
-const databaseId = process.env.NOTION_DATABASE_ID
+const notion = new Client({ auth: process.env.NOTION_KEY });
+const databaseId = process.env.NOTION_DATABASE_ID;
 
-async function addItem(title, link, tag) {
+async function addItem(title, link, category, categoryId) {
   try {
     const response = await notion.pages.create({
       parent: { database_id: databaseId },
       properties: {
-        Name: { 
-          title:[
+        Name: {
+          title: [
             {
-              "text": {
-                "content": title
-              }
-            }
-          ]
+              text: {
+                content: title,
+              },
+            },
+          ],
         },
-        Url: {
-          "type": "url",
-          "url": link
+        link: {
+          type: "url",
+          url: link,
         },
-        "Tags": {
-            "multi_select": [
-              {"name": tag}
-            ]
-          }
+        category: {
+          multi_select: [
+            {
+              name: category,
+            },
+          ],
+        },
       },
-    })
-    return true
+    });
+    return { error: null };
   } catch (error) {
-    console.error(error.body)
-    return false
+    return { error: error.message };
   }
 }
 
-module.exports = addItem
+module.exports = addItem;
