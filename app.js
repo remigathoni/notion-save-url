@@ -24,8 +24,11 @@ app.get("/", (req, res) => {
 
 app.post("/add-url", async (req, res) => {
   try {
-    const { title, link, category } = req.body;
-    const response = await addItem(title, link, category);
+    const { name, link, category } = req.body;
+    const response = await addItem(name, link, category);
+    if (!name || !link || !category) {
+      throw Error("Must include name, link, and category");
+    }
     if (response.error) throw Error(response.error.message);
     return res.json({ success: true, error: null });
   } catch (error) {

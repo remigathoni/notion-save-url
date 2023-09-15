@@ -3,7 +3,7 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_KEY });
 const databaseId = process.env.NOTION_DATABASE_ID;
 
-async function addItem(title, link, category, categoryId) {
+async function addItem(name, link, category) {
   try {
     const response = await notion.pages.create({
       parent: { database_id: databaseId },
@@ -12,7 +12,7 @@ async function addItem(title, link, category, categoryId) {
           title: [
             {
               text: {
-                content: title,
+                content: name,
               },
             },
           ],
